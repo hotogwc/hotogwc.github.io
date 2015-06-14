@@ -31,7 +31,7 @@
 
 
 
-  <title> 看看好不好使 // 王驰的博客 </title>
+  <title>  // 王驰的博客 </title>
 </head>
 
 <body>
@@ -117,7 +117,7 @@
           
           
             
-              看看好不好使
+              
             
           
         </h1>
@@ -125,7 +125,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-04-30
+          发表于 2015-06-14
         </span>
 
         
@@ -142,7 +142,31 @@
       
 
       
-        <h3 id="预览一下">预览一下</h3>
+        <h2 id="WWDC_2015笔记：Platforms_State_of_the_Union">WWDC 2015笔记：Platforms State of the Union</h2><hr>
+<p>准备开始写这个系列了，Xcode 7 还在龟速下载，所以估计 Swift 2 的代码暂时还不能玩耍，希望在写下一篇：What’s new in Swift 的时候能下载好。现在我们先来看看今年的开篇视频。</p>
+<p>每年WWDC的开篇都会概括性的介绍今年的新技术啥的，<a href="http://onevcat.com/2014/07/ios-ui-unique/" target="_blank" rel="external">喵神的这篇博客</a>对去年的开篇有比较详细的介绍。</p>
+<p>进入正题之前先说明一下，开篇视频讲的技术点之后都会有 session 进行深入的讨论，所以就走马观花一下吧，写这种大纲式的东西也不是我的强项。</p>
+<h3 id="福利">福利</h3><p>开场就是大大的福利啊！iOS，OS X，Safari 三个开发者项目整合到一起，交一个99刀就可以一年通吃三个项目，iOS 和 OS X 都交了钱的开发者会把时间相应的延长。</p>
+<p>另外，真机测试不需要开发者权限了，人人都可以插上自己的 iPhone 或者  iPad 调试自己的 App 了。不急着上 App store 的同学可以先不用交钱了。</p>
+<h3 id="瘦身">瘦身</h3><p>吹B时间开始，先讲了有83%的 iOS 用户都升级了 iOS 8，只有12%的 Android 用户升级了 Android 5 ，然后说到 iOS 9 升级只需要 1.3GB 的空间以及他们如何改进更新提醒以便不停的骚扰用户让他们尽快升级。这倒没啥，升完级别卡就行，还记得去年刚刚可以升级 iOS 8 的时候，升了级的 iPhone 4S 用户卡成了狗哭晕在厕所的场景吗？</p>
+<p>然后讲了3个让 App 瘦身的新技术：App Slicing, On Demand Resources, Bitcode. 对于我们开发者来说应该不用太关心细节，总的思路就是用户下载 app 的时候，苹果会根据他的设备来下载相应的资源以达到让 app 更小的目的。</p>
+<p>最后，适配 iOS 9 的 app 必须支持64位。</p>
+<p>但是后边可能有个比较大的 session 专门讲瘦身。</p>
+<h2 id="watchOS_2">watchOS 2</h2><p>上来个妹子讲watchOS，感觉最大的变化还是 extension 部分从手机移到了手表上，这样即使手机不在附近，手表自己也可以进行一些简单的操作，比如通过 <code>NSURLSession</code> 直接和网络进行交互。 由于 extension 不在手机上了，苹果也新引入了一个 WatchConnectivity 框架来负责表和手机的交互。</p>
+<p>然后介绍了一种除了 glance 和 notification 以外的新的展示形式: complication. 感觉像是加了时间线但是信息展示更简洁的glance。 Apple Watch 开发没怎么接触不敢妄加评论。</p>
+<p>之后，一个帅哥演示了一个 demo ，演示如何从watchOS 1的 App 转换到 watchOS 2. 还顺便介绍了新的手表上的 <code>pickView</code>，一种用表冠控制的类似手机上的<code>UIPickerView</code>。</p>
+<h2 id="基础架构">基础架构</h2><p>这里介绍的是一些 OS X 和 iOS 底层的一些更新，首先登场是压缩库。我们开发中最常用的开发库以及苹果自己Core Framework使用最多的就是 zlib，是一个在压缩时间和压缩比率上非常折中的库，但是这个库已经存在25年了。这次，苹果更新了压缩算法，推出了在压缩比率上略大于 zlib ，但是压缩时间比 zlib 短三倍的压缩库： lzfse 。而且 lzfse 的耗电也比 zlib 降低了60%</p>
+<p>其次，是 iOS 9 对于降低耗电量所做的一系列优化，比如优化了一些常用 app 的耗电量，新的背光算法，感应手机背面朝上的算法，休眠时间的计算以及低能耗模式。使得一次充电后有效使用时间比 iOS 8多了一小时。</p>
+<p>然后，介绍了如何更好的保护用户的信息，首先是Apple ID，当你用 Apple ID 激活一台新设备时，可以选择使用向另一台信任的设备发送确认码，这时，信任的设备上会出现这台待激活设备的位置信息以及确认码。新设备输入确认码后才能完成激活流程。之后是设备的锁屏密码，现在是4位的数字，由于我们现在用指纹激活的次数显著增加，输入这个4位数的机会越来越少，所以苹果这次把4位增加到6位以提高安全性。最后，在设备与服务器的连接中，苹果也使用了最新的 TLS 1.2 密码套件以及一些其他的加密技术，这些技术都被内置在了 <code>NSURLSession</code> 里。适配iOS 9的 app 应该都使用<code>NSURLSession</code> ，现在如果不是，可以在 Info.plist 里声明一下，不过这些只是苹果给开发者时间从其他的技术转移到 <code>NSURLSession</code> 。之后应该会在某一个时间点强制执行。（并没有提 <code>NSURLConnection</code>，感觉上苹果可能要淘汰它了。 ）</p>
+<p>之后是 Mac 上权限分割的问题，现在在 Mac 上，管理员权限是拥有内核权限的。我们知道 OS X 是基于 BSD 的类 Unix 系统，拥有内核权限意味着可以控制系统调用以及对于系统文件的控制，现在在最新的 OS X 系统上内核权限已经不属于管理员也就是 root 了。对于 iOS 或者 Mac 开发来说没有实际的影响，不过喜欢 hack 系统的同学们应该要找新的方法了。</p>
+<p>下边讲了 IPV6 的支持，老问题了，这次苹果给我们开发者的建议非常简单，使用官方的网络框架（实际上就是<code>NSURLSession</code>），不要使用 IPV4 的 API ，不要 hard code 任何 IP 地址。</p>
+<h2 id="iOS_9_&amp;_OS_X_（EL_Captain）">iOS 9 &amp; OS X （EL Captain）</h2><p>这里主要介绍了两个系统的新特性，首先是国际化，最大的变化就是，如果显示从右到左的文字（比如波斯语），整个iOS的UI就会翻转，如果我们之前用过 auto layout，就会知道这是正常的，只不过现在整个iOS的UI也会翻转，这样导致的结果就是，苹果为了统一，iOS 9，所有支持多语言的 app，必须使用 Auto Layout。</p>
+<p>后边又谈到了这次两个系统的各种新特性，后边应该我会写文章专门介绍这个内容，这里就不赘述了。</p>
+<h2 id="Swift_2">Swift 2</h2><p>最激动人心的部分，下一篇就会写Swift 2的内容，敬请期待。</p>
+<h2 id="Playground">Playground</h2><p>由于Xcode 7的注释可以使用 Markdown 语法，playground的玩法又多了，这次的demo展示了用 Markdown 加代码写的教学playground，图文并茂，学生还可以实时的修改里边的代码在右边看到运行的效果，看了唯一的感觉就是以后学生真的挺幸福。</p>
+<h2 id="Xcode_7">Xcode 7</h2><p>这个也在计划中，肯定要写，这里就不多写了，写好了会更新链接。</p>
+<h2 id="Metal_和_3D">Metal 和 3D</h2><p>由于不做游戏开发，这个真心看不懂。。。。</p>
+
       
     </div>
 
@@ -153,11 +177,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/06/14/wwdc_2015笔记：platforms_state_of_the_union/"></a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/01/我的第一篇博客/">看看好不好使</a>
             
           </div>
         </div>
@@ -252,7 +276,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#预览一下"><span class="nav-number">1.</span> <span class="nav-text">预览一下</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WWDC_2015笔记：Platforms_State_of_the_Union"><span class="nav-number">1.</span> <span class="nav-text">WWDC 2015笔记：Platforms State of the Union</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#福利"><span class="nav-number">1.1.</span> <span class="nav-text">福利</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#瘦身"><span class="nav-number">1.2.</span> <span class="nav-text">瘦身</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watchOS_2"><span class="nav-number">2.</span> <span class="nav-text">watchOS 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础架构"><span class="nav-number">3.</span> <span class="nav-text">基础架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS_9_&_OS_X_（EL_Captain）"><span class="nav-number">4.</span> <span class="nav-text">iOS 9 & OS X （EL Captain）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift_2"><span class="nav-number">5.</span> <span class="nav-text">Swift 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Playground"><span class="nav-number">6.</span> <span class="nav-text">Playground</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode_7"><span class="nav-number">7.</span> <span class="nav-text">Xcode 7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metal_和_3D"><span class="nav-number">8.</span> <span class="nav-text">Metal 和 3D</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
