@@ -114,7 +114,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-06-22
+          发表于 2015-06-23
         </span>
 
         
@@ -187,7 +187,57 @@
 <li>如果条件达成，可选变量就解包，可以拿来用了。</li>
 <li>在做你想做的事儿以前就检查了条件，如果没达成就提前退出了。如果条件很多，很容易就会发现哪个条件没有达成。</li>
 </ul>
-<h2 id="defer">defer</h2><p>未完待续。。。。。。</p>
+<p>貌似例子写的简单了点，那么大家看底下这个解析JSON的代码片段，配合可以传多类型的 <code>Enum</code>，让大家看看 Swift 2 的威力。</p>
+<pre><code><span class="func"><span class="keyword">func</span> <span class="title">process</span><span class="params">(json: AnyObject)</span></span> -&gt; <span class="type">Either</span>&lt;<span class="type">Person</span>,<span class="type">String</span>&gt; {
+    guard <span class="keyword">let</span> name = json[<span class="string">"name"</span>] <span class="keyword">as</span>? <span class="type">String</span>,
+          <span class="keyword">let</span> year = json[<span class="string">"year"</span>] <span class="keyword">as</span>? <span class="type">Int</span> <span class="keyword">else</span> {
+        <span class="keyword">return</span> .<span class="type">Second</span>(“bad input”)
+    }
+    <span class="keyword">let</span> person = processPerson(name, year)
+    <span class="keyword">return</span> .<span class="type">First</span>(person)
+}
+</code></pre><h2 id="Defer">Defer</h2><p>又一个好东西，<code>Defer</code> 后边跟一个闭包，这个闭包的会在当前代码段退出之前执行。是回调闭包，回调代理方法，清理对象最完美的地方。而且这闭包写在代码段的那个位置都可以。看下边的例子。</p>
+<pre><code><span class="function">func <span class="title">processSale</span><span class="params">(json: AnyObject)</span> throws </span>{
+  <span class="keyword">delegate</span>?.didBeginReadingSale()
+  guard <span class="keyword">let</span> buyerJSON = json[<span class="string">"buyer"</span>] <span class="keyword">as</span>? NSDictionary {
+    <span class="keyword">throw</span> DataError.MissingBuyer
+  }
+  <span class="keyword">let</span> buyer = <span class="function"><span class="keyword">try</span> <span class="title">processPerson</span><span class="params">(buyerJSON)</span>
+  guard <span class="keyword">let</span> price </span>= json[<span class="string">"price"</span>] <span class="keyword">as</span>? Int {
+    <span class="keyword">throw</span> DataError.MissingPrice
+}
+  <span class="keyword">return</span> Sale(buyer, price)
+}
+</code></pre><p>我们在开始这个方法的时候回调了 <code>didBeginReadingSale()</code> 代理方法，这时我们希望在这个方法退出的时候调用 <code>didEndReadingSale()</code> 代理方法，问题是在哪调用呢？ 每一个 <code>guard</code> 都有判断失败抛出异常退出方法的可能性。安全起见，我们可以这么写：</p>
+<pre><code><span class="function">func <span class="title">processSale</span><span class="params">(json: AnyObject)</span> throws </span>{
+  <span class="keyword">delegate</span>?.didBeginReadingSale()
+  guard <span class="keyword">let</span> buyerJSON = json[<span class="string">"buyer"</span>] <span class="keyword">as</span>? NSDictionary {
+    <span class="keyword">delegate</span>?.didEndReadingSale()
+    <span class="keyword">throw</span> DataError.MissingBuyer
+  }
+  <span class="keyword">let</span> buyer = <span class="function"><span class="keyword">try</span> <span class="title">processPerson</span><span class="params">(buyerJSON)</span>
+  guard <span class="keyword">let</span> price </span>= json[<span class="string">"price"</span>] <span class="keyword">as</span>? Int {
+    <span class="keyword">delegate</span>?.didEndReadingSale()
+    <span class="keyword">throw</span> DataError.MissingPrice
+}
+  <span class="keyword">delegate</span>?.didEndReadingSale()
+  <span class="keyword">return</span> Sale(buyer, price)
+}
+</code></pre><p>怎么样？丑的要死吧，刚才我们说了 <code>defer</code> 会在一个代码段退出的时候执行，而且书写的顺序不限，那么我们就可以在调用 <code>didBeginReadingSale()</code> 之后马上用 <code>defer</code> 再调用完成的代理方法 <code>didEndReadingSale()</code> 。 这样不管 <code>processSale</code> 在哪退出，都会在退出前调用 <code>didEndReadingSale()</code> 。</p>
+<pre><code><span class="function">func <span class="title">processSale</span><span class="params">(json: AnyObject)</span> throws </span>{
+  <span class="keyword">delegate</span>?.didBeginReadingSale()
+  defer { <span class="keyword">delegate</span>?.didEndReadingSale() }
+  guard <span class="keyword">let</span> buyerJSON = json[<span class="string">"buyer"</span>] <span class="keyword">as</span>? NSDictionary {
+    <span class="keyword">throw</span> DataError.MissingBuyer
+  }
+  <span class="keyword">let</span> buyer = <span class="function"><span class="keyword">try</span> <span class="title">processPerson</span><span class="params">(buyerJSON)</span>
+  guard <span class="keyword">let</span> price </span>= json[<span class="string">"price"</span>] <span class="keyword">as</span>? Int {
+    <span class="keyword">throw</span> DataError.MissingPrice
+  }
+  <span class="keyword">return</span> Sale(buyer, price)
+}
+</code></pre><p>酸爽吗？</p>
+<h2 id="Error_Handling">Error Handling</h2><p><code>Error Handling</code> 真不太想写了，目前来说并没有发现比原来的 <code>NSError</code> 和 <code>NSException</code> 有多少先进的地方。 不过, Cocoa里 Swift 版的 API 全部用了 <code>Error Handling</code>，看来也是大势所趋。</p>
 
         
       
