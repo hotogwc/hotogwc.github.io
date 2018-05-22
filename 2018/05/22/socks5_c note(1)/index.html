@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Falling in love with functional programming">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Wang Chi">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Wang Chi"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Falling in love with functional programming" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Wang Chi"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Wang Chi</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">back</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/klugjo/hexo-theme-clean-blog">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Untitled</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2018-05-22
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="Server_Architecture">Server Architecture</h2><h3 id="Server_Struct:">Server Struct:</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ss_server_ctx</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> sock_fd;</span><br><span class="line">	<span class="keyword">int</span> fd_mask; <span class="comment">/* one of AE_(READABLE|WRITABLE) */</span></span><br><span class="line">	<span class="keyword">uint16_t</span> s_port;</span><br><span class="line">	<span class="keyword">uint32_t</span> s_addr;</span><br><span class="line">	<span class="keyword">int</span> conn_count;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_conn_ctx</span> *<span class="title">conn</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_remote_ctx</span> *<span class="title">remote</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_event</span> <span class="title">io_proc</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">buf</span> *<span class="title">buf</span>;</span></span><br><span class="line">	<span class="keyword">int</span> max_fd;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_fd_set</span> *<span class="title">ss_allfd_set</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd_curr_state</span> <span class="title">fd_state</span>[1024 * 10];</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_encryptor</span> *<span class="title">encryptor</span>;</span></span><br><span class="line">	<span class="keyword">ssize_t</span> (*ss_recv)(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags,</span><br><span class="line">	       struct ss_conn_ctx *conn);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*ss_send)(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags,</span><br><span class="line">			   struct ss_conn_ctx *conn);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Server:">Server:</h3><p>after set up server, start <code>select</code> loop<br>fill in <code>io_proc</code> which is a <code>io_event</code> struct</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">void</span> <span class="title">ss_ioproc</span><span class="params">(<span class="keyword">void</span> *owner, <span class="keyword">int</span> fd, <span class="keyword">void</span> *para, <span class="keyword">int</span> mask)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">io_event</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> mask; <span class="comment">/* one of AE_(READABLE|WRITABLE) */</span></span><br><span class="line">	ss_ioproc *rfileproc;</span><br><span class="line">	ss_ioproc *wfileproc;</span><br><span class="line">	<span class="keyword">void</span> *para;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>two callbacks for read and write, since server fd is just for reading (<code>accept</code> new connections), so only <code>rfileproc</code> is set. Actually connection will only set read as well because server only need to read from client and forward the packet accordingly.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ss_accept_handle</span><span class="params">(<span class="keyword">void</span> *s, <span class="keyword">int</span> fd, <span class="keyword">void</span> *data, <span class="keyword">int</span> mask)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> conn_fd;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">conn_info</span> <span class="title">conn_info</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_conn_ctx</span> *<span class="title">nc</span>;</span></span><br><span class="line"></span><br><span class="line">	conn_fd = ss_accept(fd, conn_info.ip, &amp;conn_info.port);</span><br><span class="line">	<span class="keyword">if</span> (conn_fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">		debug_print(<span class="string">"ss_accetp failed: %s"</span>, strerror(errno));</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	nc = ss_server_add_conn(s, conn_fd, AE_READABLE, &amp;conn_info);</span><br><span class="line">	<span class="keyword">if</span> (nc == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		debug_print(<span class="string">"ss_server_add_conn failed: %s"</span>, strerror(errno));</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ss_conn_set_handle(nc, AE_READABLE, ss_io_handle, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ss_conn_ctx</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> conn_fd;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_server_ctx</span> *<span class="title">server_entry</span>;</span></span><br><span class="line">	<span class="keyword">int</span> fd_mask; <span class="comment">/* one of AE_(READABLE|WRITABLE) */</span></span><br><span class="line">	<span class="keyword">enum</span> ss_state ss_conn_state;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">conn_info</span> <span class="title">ss_conn_info</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_event</span> <span class="title">io_proc</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span></span><br><span class="line">	<span class="keyword">int</span> remote_count;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_remote_ctx</span> *<span class="title">remote</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_encryptor</span> *<span class="title">encryptor</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>ss_accept</code> will accept a new connection and get <code>ip</code> and <code>port</code> and save it to a <code>conn_info</code> and give it to connection in <code>ss_server_add_conn</code> function. </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct ss_conn_ctx *<span class="title">ss_server_add_conn</span><span class="params">(struct ss_server_ctx *s, <span class="keyword">int</span> conn_fd,</span></span></span><br><span class="line"><span class="function"><span class="params">				<span class="keyword">int</span> mask, struct conn_info *conn_info)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_conn_ctx</span> *<span class="title">new_conn</span>;</span></span><br><span class="line"></span><br><span class="line">	new_conn = <span class="built_in">calloc</span>(<span class="number">1</span>, <span class="keyword">sizeof</span>(*new_conn));</span><br><span class="line">	<span class="keyword">if</span> (new_conn == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		debug_print(<span class="string">"colloc failed: %s"</span>, strerror(errno));</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	new_conn-&gt;conn_fd = conn_fd;</span><br><span class="line">	new_conn-&gt;server_entry = s;</span><br><span class="line">	new_conn-&gt;fd_mask = mask;</span><br><span class="line">	new_conn-&gt;ss_conn_state = OPENING;</span><br><span class="line">	<span class="keyword">if</span> (conn_info) &#123;</span><br><span class="line">		<span class="built_in">strncpy</span>(new_conn-&gt;ss_conn_info.ip, conn_info-&gt;ip,</span><br><span class="line">				<span class="keyword">sizeof</span>(new_conn-&gt;ss_conn_info.ip) - <span class="number">1</span>);</span><br><span class="line">		new_conn-&gt;ss_conn_info.ip[<span class="keyword">sizeof</span>(new_conn-&gt;ss_conn_info.ip) - <span class="number">1</span>]</span><br><span class="line">									= <span class="string">'\0'</span>;</span><br><span class="line">		new_conn-&gt;ss_conn_info.port = conn_info-&gt;port;</span><br><span class="line">	&#125;</span><br><span class="line">	list_add(&amp;new_conn-&gt;<span class="built_in">list</span>, &amp;s-&gt;conn-&gt;<span class="built_in">list</span>);</span><br><span class="line">	s-&gt;conn_count++;</span><br><span class="line">	s-&gt;max_fd = (conn_fd &gt; s-&gt;max_fd) ? conn_fd : s-&gt;max_fd;</span><br><span class="line">	<span class="keyword">if</span> (ss_fd_set_add_fd(s-&gt;ss_allfd_set, conn_fd, mask) &lt; <span class="number">0</span>)</span><br><span class="line">		DIE(<span class="string">"ss_fd_set_add_fd failed"</span>);</span><br><span class="line">	<span class="keyword">if</span> (s-&gt;encryptor) &#123;</span><br><span class="line">		new_conn-&gt;encryptor = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(*new_conn-&gt;encryptor));</span><br><span class="line">		<span class="built_in">memcpy</span>(new_conn-&gt;encryptor, s-&gt;encryptor,</span><br><span class="line">					<span class="keyword">sizeof</span>(*s-&gt;encryptor));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> new_conn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>return new connection struct and set its <code>server_entry</code>, <code>conn_fd</code>, initial state, <code>ss_conn_info</code>, <code>encryptor</code>, and added it to double linked-list which head is <code>s-&gt;conn</code>, then update server’s <code>conn_count</code> and <code>max_fd</code> </p>
+<p>in the end of server accept handle, call <code>ss_conn_set_handle</code> to the new connection (also read callback only) which is <code>ss_io_handle</code> function.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ss_io_handle</span><span class="params">(<span class="keyword">void</span> *conn, <span class="keyword">int</span> fd, <span class="keyword">void</span> *data, <span class="keyword">int</span> mask)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* TODO */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_conn_ctx</span> *<span class="title">conn_ptr</span> = <span class="title">conn</span>;</span></span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">conn_info</span> <span class="title">remote_info</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_event</span> <span class="title">event</span> = &#123;</span></span><br><span class="line">		.mask = AE_READABLE,</span><br><span class="line">		.rfileproc = ss_remote_io_handle, <span class="comment">/* server readable */</span></span><br><span class="line">		.wfileproc = <span class="literal">NULL</span>,</span><br><span class="line">		.para = <span class="literal">NULL</span>,</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (conn_ptr-&gt;ss_conn_state) &#123;</span><br><span class="line">	<span class="keyword">case</span> OPENING: <span class="comment">/* reply */</span></span><br><span class="line">		ret = ss_request_handle(conn_ptr, &amp;remote_info);</span><br><span class="line">		<span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		<span class="keyword">if</span> (ss_conn_add_remote(conn_ptr, AE_READABLE,</span><br><span class="line">				&amp;remote_info, &amp;event) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">			debug_print(<span class="string">"ss_conn_add_remote() failed: %s"</span>,</span><br><span class="line">				    strerror(errno));</span><br><span class="line">			<span class="keyword">goto</span> err;</span><br><span class="line">		&#125;</span><br><span class="line">		conn_ptr-&gt;ss_conn_state = CONNECTING;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> CONNECTING: <span class="comment">/* forwarding */</span></span><br><span class="line">		client_to_remote(conn_ptr);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		debug_print(<span class="string">"unknow status: %d"</span>, conn_ptr-&gt;ss_conn_state);</span><br><span class="line">		<span class="keyword">goto</span> err;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">err:</span><br><span class="line">	debug_print(<span class="string">"close"</span>);</span><br><span class="line">	ss_server_del_conn(conn_ptr-&gt;server_entry, conn_ptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This is the core function that server read from client. </p>
+<p>if the <code>conn_state</code> is <code>OPENING</code>, server and conn will negotiate, then conn will send remote request to server. (protocol things will introduced later)<br>Server will try to <code>connect</code> to the remote addr, if success, the remote fd will be refer to it’s <code>conn</code> and <code>server</code>, and <code>server</code> will add its fd to <code>fd_set</code> and add the remote to <code>server</code>‘s remote list. At last change the <code>conn_state</code> to <code>CONNECTING</code> means the conn is established and ready to forwarding</p>
+<p>if <code>CONNECTING</code>, just call <code>client_to_remote</code> function to forward the data from <code>conn</code> to <code>remote</code>.</p>
+<p>question: how will happen if one conn change the remote???</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
