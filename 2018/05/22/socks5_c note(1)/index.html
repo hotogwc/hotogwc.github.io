@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Wang Chi"/>
+        <meta property="og:title" content="test"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Wang Chi</title>
+    <title>test - Wang Chi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -135,7 +135,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Untitled</h1>
+                    <h1>test</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
@@ -155,15 +155,27 @@
 
             <!-- Tags and categories -->
            
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/C-Networking/">#C, Networking</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
 
             <!-- Gallery -->
             
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <hr>
-<p>title: Socks5_c note(1)</p>
-<h2 id="Server_Architecture">Server Architecture</h2><h3 id="Server_Struct:">Server Struct:</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ss_server_ctx</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> sock_fd;</span><br><span class="line">	<span class="keyword">int</span> fd_mask; <span class="comment">/* one of AE_(READABLE|WRITABLE) */</span></span><br><span class="line">	<span class="keyword">uint16_t</span> s_port;</span><br><span class="line">	<span class="keyword">uint32_t</span> s_addr;</span><br><span class="line">	<span class="keyword">int</span> conn_count;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_conn_ctx</span> *<span class="title">conn</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_remote_ctx</span> *<span class="title">remote</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_event</span> <span class="title">io_proc</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">buf</span> *<span class="title">buf</span>;</span></span><br><span class="line">	<span class="keyword">int</span> max_fd;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_fd_set</span> *<span class="title">ss_allfd_set</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd_curr_state</span> <span class="title">fd_state</span>[1024 * 10];</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_encryptor</span> *<span class="title">encryptor</span>;</span></span><br><span class="line">	<span class="keyword">ssize_t</span> (*ss_recv)(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags,</span><br><span class="line">	       struct ss_conn_ctx *conn);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*ss_send)(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags,</span><br><span class="line">			   struct ss_conn_ctx *conn);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+                <h2 id="Server_Architecture">Server Architecture</h2><h3 id="Server_Struct:">Server Struct:</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ss_server_ctx</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> sock_fd;</span><br><span class="line">	<span class="keyword">int</span> fd_mask; <span class="comment">/* one of AE_(READABLE|WRITABLE) */</span></span><br><span class="line">	<span class="keyword">uint16_t</span> s_port;</span><br><span class="line">	<span class="keyword">uint32_t</span> s_addr;</span><br><span class="line">	<span class="keyword">int</span> conn_count;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_conn_ctx</span> *<span class="title">conn</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_remote_ctx</span> *<span class="title">remote</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">io_event</span> <span class="title">io_proc</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">buf</span> *<span class="title">buf</span>;</span></span><br><span class="line">	<span class="keyword">int</span> max_fd;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_fd_set</span> *<span class="title">ss_allfd_set</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">fd_curr_state</span> <span class="title">fd_state</span>[1024 * 10];</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ss_encryptor</span> *<span class="title">encryptor</span>;</span></span><br><span class="line">	<span class="keyword">ssize_t</span> (*ss_recv)(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags,</span><br><span class="line">	       struct ss_conn_ctx *conn);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*ss_send)(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags,</span><br><span class="line">			   struct ss_conn_ctx *conn);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Server:">Server:</h3><p>after set up server, start <code>select</code> loop<br>fill in <code>io_proc</code> which is a <code>io_event</code> struct</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">void</span> <span class="title">ss_ioproc</span><span class="params">(<span class="keyword">void</span> *owner, <span class="keyword">int</span> fd, <span class="keyword">void</span> *para, <span class="keyword">int</span> mask)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">io_event</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> mask; <span class="comment">/* one of AE_(READABLE|WRITABLE) */</span></span><br><span class="line">	ss_ioproc *rfileproc;</span><br><span class="line">	ss_ioproc *wfileproc;</span><br><span class="line">	<span class="keyword">void</span> *para;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>two callbacks for read and write, since server fd is just for reading (<code>accept</code> new connections), so only <code>rfileproc</code> is set. Actually connection will only set read as well because server only need to read from client and forward the packet accordingly.</p>
